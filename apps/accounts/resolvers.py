@@ -1,6 +1,9 @@
 from ariadne import ObjectType
 from .models import User, Patient, Address, PatientData
-from .exceptions import UserNotFoundError
+from .exceptions import UserNotFoundError, PasswordError
+from django.contrib.auth import authenticate
+import jwt
+from backend.settings import SECRET_KEY
 
 
 #Address Resolver
@@ -92,3 +95,16 @@ def resolve_patient_email(obj,*_):
 @patient.field("data")
 def resolve_patientdata(obj,*_):
     return obj.patientdata
+
+
+# Mutations
+def resolve_login(_,info,email,password,type):
+    user = User.objects.get(email=email, type=type)
+    if not user:
+        raise UserNotFoundError
+    user = authenticate(email=email, password=password)
+    if user is not None:
+        token = jwt.encode({"email":user.email}, SECRET_KEY, algorithm="HS256")
+        return {"token":token,"user":user}
+    else:
+        raise PasswordError

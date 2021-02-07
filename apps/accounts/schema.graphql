@@ -33,3 +33,8 @@ type Patient {
     email:String
     data:PatientData
 }
+
+type AuthToken{
+    token:String
+    user:Patient
+}

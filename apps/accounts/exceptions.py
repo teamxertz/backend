@@ -13,3 +13,6 @@ class AccountsError(Exception):
 
 class UserNotFoundError(AccountsError):
     default_message = _("No such user found!")
+
+class PasswordError(AccountsError):
+    default_message = _("Password Wrong!")

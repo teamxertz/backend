@@ -2,3 +2,7 @@ type Query {
     test(name:String): String!
     patient(email:String!):Patient!
 }
+
+type Mutation {
+    login(email:String,password:String,type:Types):AuthToken
+}
