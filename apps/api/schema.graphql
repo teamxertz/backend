@@ -1,0 +1,4 @@
+type Query {
+    test(name:String): String!
+    patient(email:String!):Patient!
+}

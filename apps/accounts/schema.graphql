@@ -1,0 +1,35 @@
+enum Gender {
+    NONE
+    MALE
+    FEMALE
+    OTHER
+}
+
+enum Types {
+    PATIENT
+    DOCTOR
+    HOSPITAL
+    SUPERADMIN
+}
+type Address {
+    line1:String
+    line2:String
+    city:String
+    state:String
+    pincode:String
+}
+
+type PatientData {
+    name:String
+    phone:String
+    age:Int
+    gender:Gender
+    address:Address
+}
+
+type Patient {
+    active:Boolean
+    type:Types
+    email:String
+    data:PatientData
+}
